@@ -1,12 +1,13 @@
 from decimal import Decimal
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class NetWorthPoint(BaseModel):
+    model_config = ConfigDict(coerce_numbers_to_str=False)
     date: str
-    amount: Decimal
+    amount: float
 
 
 class NetWorthResponse(BaseModel):
@@ -17,10 +18,10 @@ class CategorySpendItem(BaseModel):
     category_id: Optional[str] = None
     category_name: str
     color: str = "#64748b"
-    amount: Decimal
-    percentage: Decimal
+    amount: float
+    percentage: float
 
 
 class CategorySpendResponse(BaseModel):
     items: list[CategorySpendItem]
-    total: Decimal
+    total: float
